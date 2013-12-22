@@ -60,27 +60,14 @@ class LoginWindow extends BaseWindow {
 	
 	// Widgets
 	@UiField VerticalPanel containerPanel;
-	@UiField HorizontalPanel langsPanel;
 	@UiField Label usernameLabel;
 	@UiField Label passwordLabel;
 	@UiField TextBox usernameTextbox;
 	@UiField PasswordTextBox passwordTextbox;
 	@UiField Button loginButton;
-	@UiField Button createAccountButton;
 	@UiField WlWaitingLabel waitingLabel;
 	@UiField Label generalErrorLabel;
-	@UiField HTML demoAvailableHTML;
-	@UiField HTML supportHTML;
-	@UiField Grid featuresGrid;
-	@UiField VerticalPanel facebookPanel;
-	@UiField HTML openSourceAddressHTML;
-	@UiField HTML mobileHTML;
-	@UiField DecoratorPanel createAccountPanel;
-	@UiField Image hostEntityLogo;
-	@UiField HTML introText;
-	@UiField VerticalPanel guestPanel;
 	@UiField VerticalPanel messagesPanel;
-	@UiField WlAHref institutionLink;
 	@UiField DecoratorPanel olarexPanel;
 	
 	// Callbacks
@@ -124,9 +111,7 @@ class LoginWindow extends BaseWindow {
 	
 	protected void loadWidgets(){
 	    LoginWindow.uiBinder.createAndBindUi(this);
-		 
-		final String hostEntityLink = this.configurationManager.getProperty(DefaultTheme.Configuration.HOST_ENTITY_LINK, "");
-		this.institutionLink.setHref(hostEntityLink);
+
 		
 		final boolean olarexVisible = this.configurationManager.getBoolProperty("olarex", false);
 		this.olarexPanel.setVisible(olarexVisible);
@@ -140,76 +125,12 @@ class LoginWindow extends BaseWindow {
 			}
 		};
 		
-		this.langsPanel.add(new HTML(getVersionName() + " | "));
 		
-		for(int i = 0; i < IWebLabI18N.LANGUAGES.length; ++i){
-			final String curLanguage = IWebLabI18N.LANGUAGES[i];
-			final String curLanguageCode = IWebLabI18N.LANGUAGE_CODES[i];
-			final Anchor languageLink = new Anchor(curLanguage);
-			languageLink.addClickHandler(
-					new LanguageButtonClickHandler(curLanguageCode)
-				);
-			this.langsPanel.add(languageLink);
-		}		
 		
 		this.loadUsernameAndPassword();
 		this.usernameTextbox.addKeyDownHandler(keyboardHandler);
-		this.passwordTextbox.addKeyDownHandler(keyboardHandler);
-		
-		String hostEntityImage = this.configurationManager.getProperty(DefaultTheme.Configuration.HOST_ENTITY_LOGIN_IMAGE, "");
-		if(!hostEntityImage.isEmpty()){
-			if(hostEntityImage.startsWith("/"))
-				hostEntityImage = GWT.getModuleBaseURL() + hostEntityImage;
-			this.hostEntityLogo.setUrl(hostEntityImage);
-		}
-		
-		this.introText.setHTML(this.i18nMessages.weblabDeustoIsARemote_long());
-		
-		final boolean demoAvailable = this.configurationManager.getBoolProperty(
-				WebLabClientLab.DEMO_AVAILABLE_PROPERTY,
-				WebLabClientLab.DEFAULT_DEMO_AVAILABLE
-			);
-		
-		if ( demoAvailable ) {
-			final String demoUsername = this.configurationManager.getProperty( WebLabClientLab.DEMO_USERNAME_PROPERTY, WebLabClientLab.DEFAULT_DEMO_USERNAME);		
-			final String demoPassword = this.configurationManager.getProperty( WebLabClientLab.DEMO_PASSWORD_PROPERTY, WebLabClientLab.DEFAULT_DEMO_PASSWORD);	
-			this.demoAvailableHTML.setHTML(this.i18nMessages.demoLoginDetails(demoUsername, demoPassword));
-			
-		}else{
-			this.featuresGrid.removeRow(1);
-		}
-		this.guestPanel.setVisible(demoAvailable);
-		
-		final boolean createAccountVisible = this.configurationManager.getBoolProperty(CREATE_ACCOUNT_VISIBLE_PROPERTY, DEFAULT_CREATE_ACCOUNT_VISIBLE);
-		if(!createAccountVisible)
-			this.createAccountPanel.setVisible(false);
-				
-		final String adminEmail = this.configurationManager.getProperty(
-				LoginWindow.ADMIN_EMAIL_PROPERTY,
-				LoginWindow.DEFAULT_ADMIN_EMAIL
-			);
-		
-		final String translatedSupportHTML = this.i18nMessages.ifYouHaveTechnicalProblems("<a href=\"mailto:" + WlUtil.escape(adminEmail) + "\" target=\"_blank\">" + WlUtil.escapeNotQuote(adminEmail) + "</a>");
-		this.supportHTML.setHTML(translatedSupportHTML);
-		
-		final String translatedOpenSourceAddress = this.i18nMessages.weblabIsOpenSourceAvailable("<a href=\"https://github.com/weblabdeusto/weblabdeusto/\" target=\"_blank\">https://github.com/weblabdeusto/weblabdeusto/</a>");
-		this.openSourceAddressHTML.setHTML(translatedOpenSourceAddress);
-		
-		final String mobileURL = WebLabClient.getNewUrl(WebLabClient.MOBILE_URL_PARAM, "true");
-		this.mobileHTML.setHTML(this.i18nMessages.useMobileVersionClicking(mobileURL));
+		this.passwordTextbox.addKeyDownHandler(keyboardHandler);				
 
-		final boolean facebookLikeBoxVisible = this.configurationManager.getBoolProperty(FACEBOOK_LIKE_BOX_VISIBLE_PROPERTY, DEFAULT_FACEBOOK_LIKE_BOX_VISIBLE);
-		if(facebookLikeBoxVisible){
-			final int facebookIFrameWidth  = this.configurationManager.getIntProperty(FACEBOOK_LIKE_BOX_WIDTH_PROPERTY, DEFAULT_FACEBOOK_LIKE_BOX_WIDTH);
-			final int facebookIFrameHeight = this.configurationManager.getIntProperty(FACEBOOK_LIKE_BOX_HEIGHT_PROPERTY, DEFAULT_FACEBOOK_LIKE_BOX_HEIGHT);
-			final String facebookIFrameAppID = this.configurationManager.getProperty(FACEBOOK_LIKE_BOX_ID_PROPERTY, DEFAULT_FACEBOOK_LIKE_BOX_ID);
-			final String facebookIFrameCode = "<iframe src=\"https://www.facebook.com/plugins/likebox.php?href=http://www.facebook.com/apps/application.php%3Fid%3D" + facebookIFrameAppID  
-												+ "&amp;width=" + facebookIFrameWidth + "&amp;colorscheme=light&amp;show_faces=true&amp;stream=false&amp;header=false&amp;height=" + facebookIFrameHeight
-												+ "\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; width:" + facebookIFrameWidth 
-												+ "px; height:" + facebookIFrameHeight + "px; border-style:solid; border-color: #135cae\" allowTransparency=\"true\"></iframe>";
-			final HTML facebookIframe = new HTML(facebookIFrameCode);
-			this.facebookPanel.add(facebookIframe);
-		}
 	}	
 	
 	private void loadUsernameAndPassword() {
@@ -262,13 +183,6 @@ class LoginWindow extends BaseWindow {
 		}
 	}
 	
-	@UiHandler("guestButton")
-	void onGuestButtonClicked(@SuppressWarnings("unused") ClickEvent e) {
-		final String demoUsername = this.configurationManager.getProperty( WebLabClientLab.DEMO_USERNAME_PROPERTY, WebLabClientLab.DEFAULT_DEMO_USERNAME);		
-		final String demoPassword = this.configurationManager.getProperty( WebLabClientLab.DEMO_PASSWORD_PROPERTY, WebLabClientLab.DEFAULT_DEMO_PASSWORD);	
-
-		startLoginProcess(demoUsername, demoPassword);
-	}
 
 	private void startLoginProcess(String username, String password) {
 		this.messagesPanel.setVisible(true);
@@ -277,11 +191,6 @@ class LoginWindow extends BaseWindow {
 		this.waitingLabel.setVisible(true);
 		this.loginButton.setEnabled(false);
 		this.callback.onLoginButtonClicked(username, password);
-	}
-	
-	@UiHandler("createAccountButton")
-	void onCreateAccountClicked(@SuppressWarnings("unused") ClickEvent e){
-		Location.replace("http://apps.facebook.com/weblab-deusto");
 	}
 	
     @Override
@@ -320,19 +229,6 @@ class LoginWindow extends BaseWindow {
 		}
 	}	
 	
-	private class LanguageButtonClickHandler implements ClickHandler{
-		private final String languageCode;
-		
-		public LanguageButtonClickHandler(String languageCode){
-			this.languageCode = languageCode;
-		}
-
-		@Override
-		public void onClick(ClickEvent sender) {
-			Cookies.setCookie(WebLabClient.LOCALE_COOKIE, this.languageCode);
-			WebLabClient.refresh(this.languageCode);
-		}
-	}
 
 	void setUsernameFocus() {
 		this.usernameTextbox.setFocus(true);

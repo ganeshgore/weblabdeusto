@@ -44,11 +44,10 @@ input {
 
 .wl-time_remaining
 {
-	color : #FF0000;
-	font-weight: bold;
-	font-size: 150%;
 	display: block;
 	margin: 10px;
+	font-size: 150%;
+	font-weight: bold;
 }
 
 .wl-pressable 
@@ -78,6 +77,7 @@ input {
 {
 	display: block;
 	text-align: right;
+	border:2px solid blue;
 }
 
 .gwt-DecoratorPanel .middleCenter {
@@ -156,7 +156,7 @@ a:hover
 
 .even-row
 { 
-	background-color: #d3def6;  
+	background-color: #d3def6;
 }
 
 .web-error-message
@@ -740,6 +740,24 @@ a:hover
 }
 .gwt-ProgressBar-thin .gwt-ProgressBar-bar {
   background-color: #67A7E3;
+}
+.gwt-test {
+	padding: 10px;
+	border: 0px solid black;
+}
+.gwt-exp-pulseSwPan {
+	background-size: 450px 180px;
+	padding-top: 23px;
+	padding-right: 23px;
+	padding-left: 23px;
+	background-repeat: repeat;
+	background-image: url('./img/arduino/Pulse_BB.jpg');
+}
+.gwt-exp-pushSwPan {
+	background-size: 450px 180px;
+	padding: 10px 24px 15px;
+	background-repeat: repeat;
+	background-image: url('./img/arduino/Switch_BB.jpg');
 }
 
 

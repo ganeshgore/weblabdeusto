@@ -63,8 +63,8 @@
 						</g:HorizontalPanel>
 						
 						<g:HorizontalPanel width="100%" verticalAlignment="ALIGN_BOTTOM" horizontalAlignment="ALIGN_RIGHT" spacing="1">
-							<g:SimplePanel width="100%" height="120px">
-								<g:TextBox ui:field="LogWindow" height="100%" width="300px"/>
+							<g:SimplePanel width="300px" height="120px">
+								<g:TextArea width="100%" height="100%" ui:field="LogWindow" text="log window" styleName="gwt-logwindow"/>
 							</g:SimplePanel>
 							
 							<g:VerticalPanel verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_CENTER" spacing="20" width="150px">

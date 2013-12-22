@@ -1,4 +1,4 @@
-package es.deusto.weblab.client.experiments.dummy.ui;
+package es.deusto.weblab.client.experiments.arduino.ui;
 
 import java.util.Vector;
 
@@ -36,6 +36,7 @@ import es.deusto.weblab.client.ui.widgets.WlWaitingLabel;
 import es.deusto.weblab.client.ui.widgets.WlWebcam;
 
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.TextArea;
 
 public class XilinxExperiment extends ExperimentBase{
 
@@ -96,7 +97,6 @@ public class XilinxExperiment extends ExperimentBase{
 	@UiField Button BuilldButton;
 	@UiField Button upload2boardButton;
 	@UiField Button uploadFile;
-	@UiField TextBox LogWindow;
 	@UiField Label UploadStat;
 	@UiField VerticalPanel inputchekbx;
 	@UiField VerticalPanel outputchekbx;
@@ -111,6 +111,7 @@ public class XilinxExperiment extends ExperimentBase{
 	@UiField WlTimedButton psw3;
 	@UiField WlTimedButton psw4;
 	@UiField Button ResetArduino;
+	@UiField TextArea LogWindow;
 	
 	
 	private static Vector<CheckBox> inputChkBoxVec;
@@ -175,8 +176,8 @@ public class XilinxExperiment extends ExperimentBase{
 				if(swi.getTitle().length() != 1) 
 					continue;
 				
-				final int id = this.PushSwRow.getWidgetCount() - Integer.parseInt(swi.getTitle()) - 1;
-				final IWlActionListener actionListener = new SwitchListener(id+2, this.boardController, this.getResponseCommandCallback());
+				final int id = Integer.parseInt(swi.getTitle());
+				final IWlActionListener actionListener = new SwitchListener(id, this.boardController, this.getResponseCommandCallback());
 				swi.addActionListener(actionListener);
 			}
 		}

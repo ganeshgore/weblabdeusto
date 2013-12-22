@@ -43,16 +43,12 @@ public abstract class WebLabClient implements EntryPoint {
     
 	public static String PROFILE_URL;
 	
-    public static boolean IS_MOBILE = false;
-
-	public static final int MAX_FACEBOOK_WIDTH = 735;
 	private static final String MAIN_SLOT = "weblab_slot";
 	private static final String SCRIPT_CONFIG_FILE = GWT.getModuleBaseURL() + "configuration.js";
-	public static final String MOBILE_URL_PARAM = "mobile";
+
 	private static final String LOCALE_URL_PARAM = "locale";
 	
 	public static final String LOCALE_COOKIE = "weblabdeusto.locale";
-	public static final String MOBILE_COOKIE = "weblabdeusto.mobile";
 	
 	public static final String HOST_ENTITY_DEFAULT_LANGUAGE = "host.entity.default.language";
 	public static final String DEFAULT_HOST_ENTITY_DEFAULT_LANGUAGE = "en";
@@ -61,12 +57,7 @@ public abstract class WebLabClient implements EntryPoint {
 	public static final String DEFAULT_THEME = "deusto";
 	private static final String GOOGLE_ANALYTICS_TRACKING_CODE = "google.analytics.tracking.code";
 	
-	// These are the minimum width and height to choose the standard version over the
-	// mobile one automatically. The choice can nonetheless be forced upon the client
-	// by explicitly specifying the "mobile" GET variable.
-	private static final int MIN_NON_MOBILE_WIDTH = 480;
-	private static final int MIN_NON_MOBILE_HEIGHT = 350;
-	private static final int MIN_NON_MOBILE_AREA = 350 * 300;
+
 	
 	public ConfigurationManager configurationManager;
 	private boolean languageDecisionPending = false;
@@ -98,41 +89,6 @@ public abstract class WebLabClient implements EntryPoint {
 	 * @return True if we should display the mobile version, false otherwise
 	 */
 	boolean isMobile(){
-		
-		// If it was explicitly specified through the GET var, do what it says and set a cookie.
-		final String urlSaysIsMobile = Window.Location.getParameter(WebLabClient.MOBILE_URL_PARAM);
-		if(urlSaysIsMobile != null) {
-			if(urlSaysIsMobile.toLowerCase().equals("yes") || 
-					urlSaysIsMobile.toLowerCase().equals("true")) {
-				Cookies.setCookie(MOBILE_COOKIE, "true");
-				return true;
-			} else if(urlSaysIsMobile.toLowerCase().equals("no") ||
-					urlSaysIsMobile.toLowerCase().equals("false")) {
-				Cookies.setCookie(MOBILE_COOKIE, "false");
-				return false;
-			} else {
-				// We are receiving an unexpected value for the mobile parameter.
-				// We will not make assumptions about this parameter, and we will
-				// delete the mobile cookie. 
-				Cookies.removeCookie(MOBILE_COOKIE);
-			}
-		}
-		
-		// It was not specified. Now, we will first try to find a cookie that tells us what to do.
-		final String cookieSaysIsMobile = Cookies.getCookie(MOBILE_COOKIE);
-		if(cookieSaysIsMobile != null)
-			return cookieSaysIsMobile.equals("true");
-		
-		
-		// It was not specified, and we did not find a cookie, so we will choose the best option
-		// depending on the user's browser resolution.
-		final int width = Window.getClientWidth();
-		final int height = Window.getClientHeight();
-		final int area = width * height;
-
-        // We check everything > 0 just in case there are issues with frames (such as facebook iframes)
-		if ((width > 0 && width <= MIN_NON_MOBILE_WIDTH) || (height > 0 && height <= MIN_NON_MOBILE_HEIGHT) || (area > 0 && area <= MIN_NON_MOBILE_AREA))
-			return true;
 		return false;
 	}
 	
@@ -198,7 +154,7 @@ public abstract class WebLabClient implements EntryPoint {
 	public void onModuleLoad() {
 		HistoryProperties.load();
 
-		final WlWaitingLabel loadingLabel = new WlWaitingLabel("Loading WebLab-Deusto");
+		final WlWaitingLabel loadingLabel = new WlWaitingLabel("Loading Eduvance Remolabs");
 		loadingLabel.start();
 		this.putWidget(loadingLabel.getWidget());
 		

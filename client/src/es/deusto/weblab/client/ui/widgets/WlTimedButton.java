@@ -51,9 +51,9 @@ public class WlTimedButton extends VerticalPanel implements IWlWidget{
 		this.visiblePanel = this;
 		this.setWidth("100%"); 
 		this.visiblePanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		this.visiblePanel.add(this.titleLabel);
 		this.visiblePanel.add(this.button.getWidget());
-		this.visiblePanel.add(this.textbox.getWidget());
+		this.visiblePanel.add(this.titleLabel);
+		//this.visiblePanel.add(this.textbox.getWidget());
 
 		this.button.addActionListener(new IWlActionListener(){
 			@Override

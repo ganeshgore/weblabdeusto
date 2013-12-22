@@ -27,6 +27,6 @@ public class PulseCommand extends Command{
 
 	@Override
 	public String getCommandString() {
-		return "SetPulse " + (this.state?"on":"off") + " " + this.number;
+		return "ChangePSwitch " + (this.state?"on":"off") + " " + this.number;
 	}
 }

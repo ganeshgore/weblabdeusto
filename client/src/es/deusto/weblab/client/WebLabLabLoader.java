@@ -157,6 +157,10 @@ public class WebLabLabLoader {
 							});
 						}
 					}
+					
+					System.out.println("----->>> providedSessionId " + providedSessionId);
+					System.out.println("----->>> providedReservationId " + providedReservationId);
+					System.out.println("----->>> experimentId " + experimentId);
 				
 				}catch(final Exception e){
 					WebLabLabLoader.this.weblabClient.showError("Error initializing theme: " + e.getMessage());
@@ -195,7 +199,6 @@ public class WebLabLabLoader {
 	}
 	
 	private boolean isFacebook(){
-	    final String urlSaysIsFacebook = Window.Location.getParameter(WebLabLabLoader.FACEBOOK_URL_PARAM);
-	    return urlSaysIsFacebook != null && (urlSaysIsFacebook.toLowerCase().equals("yes") || urlSaysIsFacebook.toLowerCase().equals("true"));
+	   return false;
 	}
 }

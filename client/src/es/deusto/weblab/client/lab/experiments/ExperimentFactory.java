@@ -95,6 +95,7 @@ public class ExperimentFactory {
 					final ExperimentEntry entry = new ExperimentEntry(experimentCategory, experimentName, creatorFactory.createExperimentCreator(configurationRetriever), configurationRetriever);
 					
 					EntryRegistry.entries.add(entry);
+				
 				}
 			}
 		}catch(ExperimentCreatorInstanciationException exc){

@@ -129,7 +129,7 @@ class LoginWindow extends BaseWindow {
 			}
 		});
 		
-		this.classicLink.setHref(WebLabClient.getNewUrl(WebLabClient.MOBILE_URL_PARAM, "false"));
+		
 		
 		this.mainPanel.add(wid);
 		

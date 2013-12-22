@@ -14,6 +14,7 @@
 package es.deusto.weblab.client.ui.widgets;
 
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -35,7 +36,8 @@ public abstract class WlWidgetWithPressable extends VerticalPanel implements IWl
 		this.actionListenerContainer = new WlActionListenerContainer();
 		
 		this.setWidth("100%");
-		this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);		
+		this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		//this.setVerticalAlignment(HasVerticalAlignment.ALIGN_BOTTOM);
 		this.visiblePanel.add(this.title);
 		this.setStyleName("wl-pressable");
 		
@@ -111,8 +113,9 @@ public abstract class WlWidgetWithPressable extends VerticalPanel implements IWl
 		this.currentImage = currentImage;
 		for(int i = 0; i < this.visiblePanel.getWidgetCount(); ++i)
 			this.visiblePanel.remove(i);
-		this.visiblePanel.add(this.title);
+		//this.visiblePanel.add(this.title);
 		this.visiblePanel.add(this.currentImage);
+		
 	}
 
 	protected Image getOldImage() {

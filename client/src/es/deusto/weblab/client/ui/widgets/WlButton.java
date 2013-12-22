@@ -27,8 +27,8 @@ import es.deusto.weblab.client.ui.audio.AudioManager;
 
 public class WlButton extends WlWidgetWithPressable{
 	
-	public static final String DEFAULT_BUTTON_PRESSED_IMAGE = GWT.getModuleBaseURL() + "img/button_pressed.png";
-	public static final String DEFAULT_BUTTON_RELEASED_IMAGE = GWT.getModuleBaseURL() + "img/button.png";
+	public static final String DEFAULT_BUTTON_PRESSED_IMAGE = GWT.getModuleBaseURL() + "/img/arduino/SwDown.png"; //"img/button_pressed.png";
+	public static final String DEFAULT_BUTTON_RELEASED_IMAGE = GWT.getModuleBaseURL() + "/img/arduino/SwUp.png"; //"img/button.png";
 	public static final int    DEFAULT_TIME = 5000; //milliseconds
 	
 	private final Image       pressedImage;
